@@ -41,7 +41,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sign up" />
-
+    <LinearLayout
+        android:id="@+id/LinearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
     <EditText
         android:id="@+id/editText8"
         android:layout_width="match_parent"
@@ -49,12 +54,23 @@
         android:ems="9"
         android:inputType="textPersonName"
         android:text="Already have an account?" />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="224dp"
-        android:layout_height="57dp"
-        android:baselineAligned="false"
-        android:text="Sign in" />
+
+    <LinearLayout
+        android:id="@+id/LinearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="224dp"
+            android:layout_height="57dp"
+            android:baselineAligned="false"
+            android:text="Sign in" />
+    </LinearLayout>
+
 
 </LinearLayout>
