@@ -8,6 +8,7 @@
 
     <ImageView
         android:id="@+id/imageView"
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="93dp"
         app:srcCompat="@drawable/truck" />
@@ -15,59 +16,94 @@
     <EditText
         android:id="@+id/editText7"
         android:layout_width="match_parent"
-        android:layout_height="59dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Full Name" />
+        android:hint="Full Name" />
 
     <EditText
         android:id="@+id/editText5"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:text="Email" />
+        android:hint="E-mail" />
 
     <EditText
         android:id="@+id/editText6"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="Password" />
+        android:hint="Password" />
 
     <Button
+        android:background="#68A93D"
+        android:textColor="@android:color/white"
         android:id="@+id/button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
         android:text="Sign up" />
-    <LinearLayout
-        android:id="@+id/LinearLayout1"
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical">
-    <EditText
-        android:id="@+id/editText8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="9"
-        android:inputType="textPersonName"
-        android:text="Already have an account?" />
-    </LinearLayout>
+        android:layout_centerVertical="true"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            android:id="@+id/tvText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Already have a account?"
+            android:textColor="@android:color/darker_gray"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_toLeftOf="@id/tvText"
+            android:background="@android:color/darker_gray"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:layout_toRightOf="@id/tvText"
+            android:background="@android:color/darker_gray"
+            />
+    </RelativeLayout>
 
 
     <LinearLayout
         android:id="@+id/LinearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:gravity="center"
         android:orientation="vertical">
 
         <Button
+            android:background="#68A93D"
+            android:textColor="@android:color/white"
             android:id="@+id/button2"
             android:layout_width="224dp"
-            android:layout_height="57dp"
+            android:layout_height="60dp"
             android:baselineAligned="false"
             android:text="Sign in" />
     </LinearLayout>
