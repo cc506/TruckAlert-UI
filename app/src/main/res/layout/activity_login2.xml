@@ -50,7 +50,8 @@
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:text="Email" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -61,13 +62,14 @@
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:hint="@string/prompt_password"
+                    android:hint="Password"
                     android:imeActionId="6"
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:text="Password" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -80,7 +82,7 @@
                 <Button
                     android:background="#68A93D"
                     android:textColor="@android:color/white"
-                    android:id="@+id/email_sign_up_button"
+                    android:id="@+id/email_sign_up_button23"
                     android:layout_width="190dp"
                     android:layout_height="60dp"
                     android:layout_marginRight="5dp"
@@ -97,16 +99,47 @@
                     android:layout_height="60dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="15dp"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="15dp"
                     android:text="Sign In"
                     android:textStyle="bold">
                 </Button>
             </LinearLayout>
 
-            <View
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@android:color/darker_gray"/>
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:id="@+id/tvText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="or"
+                    android:textColor="@android:color/darker_gray"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@id/tvText"
+                    android:background="@android:color/darker_gray"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@id/tvText"
+                    android:background="@android:color/darker_gray" />
+            </RelativeLayout>
 
             <Button
                 android:background="#274B7B"
@@ -117,6 +150,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
+                android:padding="22dp"
+                android:drawableLeft="@drawable/facebook_icon_18_ffffff_20"
                 android:text="LOGIN WITH FACEBOOK"
                 android:textStyle="bold">
             </Button>
@@ -129,14 +164,13 @@
                 android:layout_height="60dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="30dp"
+                android:padding="22dp"
+                android:drawableLeft="@drawable/googleg_disabled_color_18"
                 android:text="LOGIN WITH GOOGLE"
                 android:textStyle="bold">
             </Button>
 
         </LinearLayout>
     </ScrollView>
-
-
-
 
 </LinearLayout>

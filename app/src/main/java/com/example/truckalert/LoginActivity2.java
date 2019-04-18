@@ -39,7 +39,8 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks<Cursor> {
-    private Button button;
+    private Button email_sign_in_button23;
+    private Button email_sign_in_button;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -65,17 +66,26 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        button=(Button) findViewById(R.id.email_sign_up_button);
-        button.setOnClickListener(new View.OnClickListener(){
-            @Override
-                    public void onClick(View v){
-                        openSignup();
-            }
-            });
+
 
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
+        email_sign_in_button23=(Button) findViewById(R.id.email_sign_up_button23);
+        email_sign_in_button=(Button) findViewById(R.id.email_sign_in_button);
+
+        email_sign_in_button23.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                openSignup();
+            }
+        });
+        email_sign_in_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                openMap();
+            }
+        });
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -105,6 +115,10 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
     }
     public void openSignup(){
         Intent intent = new Intent(this, Signup.class);
+        startActivity(intent);
+    }
+    public void openMap(){
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
     private void populateAutoComplete() {

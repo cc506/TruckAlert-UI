@@ -26,11 +26,11 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Signup"
-            android:label="@string/title_activity_signup"
+            android:label="Signup"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".LoginActivity2"
-            android:label="@string/title_activity_login2">
+            android:label="Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
