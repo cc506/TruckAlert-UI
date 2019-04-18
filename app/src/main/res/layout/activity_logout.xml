@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="204dp"
-        android:layout_height="47dp"
+        android:layout_width="234dp"
+        android:layout_height="88dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -17,7 +17,7 @@
         android:contentDescription="Logout Successful"
         android:text="Logout Successful"
         android:textAlignment="center"
-        android:textSize="18sp"
+        android:textSize="25sp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
