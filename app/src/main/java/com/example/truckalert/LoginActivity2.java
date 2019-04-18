@@ -3,6 +3,7 @@ package com.example.truckalert;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -38,7 +39,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks<Cursor> {
-
+    private Button button;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -64,6 +65,15 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        button=(Button) findViewById(R.id.email_sign_up_button);
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+                    public void onClick(View v){
+                        openSignup();
+            }
+            });
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
         // Set up the login form.
@@ -93,7 +103,10 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
-
+    public void openSignup(){
+        Intent intent = new Intent(this, Signup.class);
+        startActivity(intent);
+    }
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
             return;
