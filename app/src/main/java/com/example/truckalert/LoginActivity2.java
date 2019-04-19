@@ -39,7 +39,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks<Cursor> {
-    private Button email_sign_in_button23;
+    private Button email_sign_up_button23;
     private Button email_sign_in_button;
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -67,23 +67,15 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
-        email_sign_in_button23=(Button) findViewById(R.id.email_sign_up_button23);
-        email_sign_in_button=(Button) findViewById(R.id.email_sign_in_button);
-
-        email_sign_in_button23.setOnClickListener(new View.OnClickListener(){
+        //SIGN UP GOES TO SIGN UP SCREEN
+        email_sign_up_button23=(Button) findViewById(R.id.email_sign_up_button23);
+        email_sign_up_button23.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                openSignup();
-            }
-        });
-        email_sign_in_button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                openMap();
+                Intent intent = new Intent(LoginActivity2.this, Signup.class);
+                startActivity(intent);
             }
         });
         // Set up the login form.
@@ -102,6 +94,7 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
             }
         });
 
+        //SIGN IN GOES TO ATTEMPTED SIGN IN, THEN MAP
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -113,14 +106,7 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
-    public void openSignup(){
-        Intent intent = new Intent(this, Signup.class);
-        startActivity(intent);
-    }
-    public void openMap(){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
+
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
             return;
@@ -214,6 +200,7 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
+            openMap();
         }
     }
 
@@ -317,6 +304,12 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
         int IS_PRIMARY = 1;
     }
 
+    // Action of going to map
+    public void openMap(){
+        Intent mapIntent = new Intent(this, MainActivity.class);
+        startActivity(mapIntent);
+    }
+
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
@@ -360,7 +353,7 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
             showProgress(false);
 
             if (success) {
-                finish();
+                openMap();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
