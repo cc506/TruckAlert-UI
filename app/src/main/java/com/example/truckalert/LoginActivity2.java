@@ -69,6 +69,7 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
+
         //SIGN UP GOES TO SIGN UP SCREEN
         email_sign_up_button23=(Button) findViewById(R.id.email_sign_up_button23);
         email_sign_up_button23.setOnClickListener(new View.OnClickListener(){
@@ -78,6 +79,7 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
                 startActivity(intent);
             }
         });
+
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -200,7 +202,6 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
-            openMap();
         }
     }
 
