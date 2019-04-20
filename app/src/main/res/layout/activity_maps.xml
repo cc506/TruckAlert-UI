@@ -46,8 +46,8 @@
             android:layout_gravity="end|bottom"
             android:src="@android:drawable/ic_menu_directions"
             android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@+id/fab_location"
-            android:layout_alignStart="@+id/fab_location"
+            android:layout_alignLeft="@+id/fab_mic"
+            android:layout_alignStart="@+id/fab_mic"
             map:backgroundTint="#274B7B"/>
 
         <android.support.design.widget.FloatingActionButton
