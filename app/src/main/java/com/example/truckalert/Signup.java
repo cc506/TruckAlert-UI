@@ -16,13 +16,13 @@ public class Signup extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //go to main screen after signing up
+        //go to Sign in screen after signing up
         setContentView(R.layout.activity_signup);
         button_Signup2 = findViewById(R.id.button_Signup2);
         button_Signup2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Signup.this, MainActivity.class);
+                Intent intent = new Intent(Signup.this, LoginActivity2.class);
                 startActivity(intent);
             }
         });
