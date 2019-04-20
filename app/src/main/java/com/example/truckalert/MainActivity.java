@@ -11,11 +11,16 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
+import android.speech.tts.TextToSpeech;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -33,7 +38,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static com.example.truckalert.Constants.MAPVIEW_BUNDLE_KEY;
 import static com.example.truckalert.Constants.PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION;
@@ -42,13 +49,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private static final String TAG = "MainActivity";
 
-    private boolean mLocationPermissionGranted = false;
+    //Initialize Voice Assistant
+    private TextToSpeech voice;
+    private SpeechRecognizer recognizer;
 
+
+    //Initialize Map & Location service
     private MapView mMap;
     GoogleMap googleMap;
     LocationRequest mLocationRequest;
     Location mLastLocation;
     FusedLocationProviderClient mFusedLocationClient;
+    private boolean mLocationPermissionGranted = false;
 
     /**
      * Manipulates the map once available.
@@ -76,7 +88,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mfab_mic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                initializeVoice();
+                initializeSpeechRecognizer();
+                Intent voiceIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                voiceIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                voiceIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1);
+                recognizer.startListening(voiceIntent);
             }
         });
 
@@ -88,6 +105,97 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
     }
+
+    // Voice Assistant Methods
+    private void initializeVoice() {
+        voice = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(voice.getEngines().size() == 0){
+                    Toast.makeText(MainActivity.this, "Your Device is missing the voice componenet."
+                    , Toast.LENGTH_LONG).show();
+                }
+                else{
+                    voice.setLanguage(Locale.US);
+                    speak("Hello! Welcome to TruckAlert!");
+                }
+            }
+        });
+    }
+
+    private void speak(String s) {
+            voice.speak(s, TextToSpeech.QUEUE_FLUSH, null, null);
+    }
+
+    private void initializeSpeechRecognizer() {
+        if(SpeechRecognizer.isRecognitionAvailable(this)){
+            recognizer = SpeechRecognizer.createSpeechRecognizer(this);
+            recognizer.setRecognitionListener(new RecognitionListener() {
+                @Override
+                public void onReadyForSpeech(Bundle params) {
+
+                }
+
+                @Override
+                public void onBeginningOfSpeech() {
+
+                }
+
+                @Override
+                public void onRmsChanged(float rmsdB) {
+
+                }
+
+                @Override
+                public void onBufferReceived(byte[] buffer) {
+
+                }
+
+                @Override
+                public void onEndOfSpeech() {
+
+                }
+
+                @Override
+                public void onError(int error) {
+
+                }
+
+                @Override
+                public void onResults(Bundle results) {
+                    List<String> incidences = results.getStringArrayList(
+                            SpeechRecognizer.RESULTS_RECOGNITION
+                    );
+                    processResult(incidences.get(0));
+                }
+
+                @Override
+                public void onPartialResults(Bundle partialResults) {
+
+                }
+
+                @Override
+                public void onEvent(int eventType, Bundle params) {
+
+                }
+            });
+        }
+    }
+
+    private void processResult(String s) {
+        s = s.toLowerCase();
+
+        if(s.indexOf("time") != -1){
+            Date now = new Date();
+            String time = DateUtils.formatDateTime(this, now.getTime(), DateUtils.FORMAT_SHOW_TIME);
+            speak("The time is " + time);
+        }
+        else if(s.indexOf("accident") != -1){
+
+        }
+
+    }
+
 
     private void GoogleMaps(Bundle savedInstanceState){
         // *** IMPORTANT ***
@@ -174,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             if (locationList.size() > 0) {
                 //The last location in the list is the newest
                 Location location = locationList.get(locationList.size() - 1);
-                Log.i("MapsActivity", "Location: " + location.getLatitude() + " " + location.getLongitude());
+                Log.i("Maps", "Location: " + location.getLatitude() + " " + location.getLongitude());
                 mLastLocation = location;
 
                 //Place current location marker
@@ -199,7 +307,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 // sees the explanation, try again to request the permission.
                 new AlertDialog.Builder(this)
                         .setTitle("Location Permission Needed")
-                        .setMessage("This app needs the Location permission, please accept to use location functionality")
+                        .setMessage("This application requires Location Services to work properly, do you want to enable it?")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -247,8 +355,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
                 return;
             }
-            // other 'case' lines to check for other
-            // permissions this app might request
+            // other 'case' permissions this app might request
         }
     }
 
