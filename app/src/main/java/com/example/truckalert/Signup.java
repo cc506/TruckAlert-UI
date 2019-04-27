@@ -25,7 +25,10 @@ public class Signup extends AppCompatActivity {
             public void onClick(View v) {
                 Intent goBackIntent = new Intent(Signup.this, LoginActivity2.class);
                 startActivity(goBackIntent);
+
             }
+
+
         });
 
         FloatingActionButton mfab = findViewById(R.id.fab);

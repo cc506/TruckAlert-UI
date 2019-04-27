@@ -19,8 +19,17 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Full Name" />
+        android:hint="First Name"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:ems="10"
+        android:hint="Last Name"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/editText5"
