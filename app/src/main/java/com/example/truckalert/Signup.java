@@ -11,14 +11,24 @@ import android.widget.Button;
 import android.widget.ExpandableListView;
 
 public class Signup extends AppCompatActivity {
+    private Button button_Signup2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //go to Sign in screen after signing up
         setContentView(R.layout.activity_signup);
+        button_Signup2 = findViewById(R.id.button_Signup2);
+        button_Signup2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Signup.this, LoginActivity2.class);
+                startActivity(intent);
+            }
+        });
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        // go back to signin screen
         Button signin_signup = findViewById(R.id.button2);
         signin_signup.setOnClickListener(new View.OnClickListener() {
             @Override
