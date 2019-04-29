@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.lang.String;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class JDBC {
@@ -25,7 +28,12 @@ public class JDBC {
         String username = "postgres";
         String password = "3service4";
 
-        String SQL = "INSERT INTO UserCredentials(email,first_name,last_name,pass) VALUES (" + emaiL + "," + firstName + "," + lastName + "," + passWord + ");";
+
+        //INSERT INTO user_credentials (email, first_name, last_name, pass)
+        //VALUES ('reeree', 'Kevin', 'Ta', 'onision')
+
+        String SQL = "INSERT INTO user_credentials(email,first_name,last_name,pass)"
+                    + "VALUES ('" + emaiL + "','" + firstName + "','" + lastName + "','" + passWord + "');";
 
         try (Connection conn = DriverManager.getConnection(URL, username, password);
              Statement pstmt = conn.createStatement()) {
@@ -47,47 +55,65 @@ public class JDBC {
     }
 
 
-    public boolean CheckLoginInfo (String email, String passWord){
-        boolean a;
-
-        String checkEmail = "SELECT email,  FROM UserCredentials";
-        String checkPassword = "SELECT pass, FROM UserCredentials";
 
 
-        if (email.equals(checkEmail) && passWord.equals(checkPassword)){
-            a = true;
-            return a;
-        }
-        else{
-            a = false;
-            return a;
-        }
+    public static boolean CheckLoginInfo (String emailInput, String passWordInput){
+        boolean a = true;
+
+        String URL = "jdbc:postgresql://localhost:5432/postgres";
+        String username = "postgres";
+        String password = "3service4";
 
 
+        String SQL = "SELECT email, pass FROM user_credentials";
 
-    }
+        List <String> emailList = new ArrayList<String>();
+        List <String> passList = new ArrayList<String>();
 
 
-    /*
-    public int getActorCount() {
-        String SQL = "SELECT count(*) FROM actor";
-        int count = 0;
+        try (Connection conn = DriverManager.getConnection(URL, username, password);
+             Statement pstmt = conn.createStatement();
+             Statement pstmt2 = conn.createStatement();
+             ResultSet rs1 = pstmt.executeQuery(SQL)){
 
-        try (Connection conn = connect();
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(SQL)) {
-            rs.next();
-            count = rs.getInt(1);
+           String email, userPassword;
+
+           int i = 0;
+
+
+           while (rs1.next()){
+
+               emailList.add(rs1.getString(1));
+               passList.add(rs1.getString(2));
+           }
+
+
+           while (i < emailList.size()){
+
+               if (emailInput.equals(emailList.get(i)) && passWordInput.equals(passList.get(i))){
+                   a = true;
+                   System.out.println("Found the user!");
+                   return a;
+               }
+
+               else {
+                   a = false;
+                   System.out.println("Still searching....");
+
+               }
+               i++;
+
+           }
+
+           System.out.println("User not found!");
+
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+            System.out.println("XXXX");
         }
-
-        return count;
+        return a;
     }
-
-     */
-
-
 
 
     public static void main(String[] args){
@@ -127,7 +153,11 @@ public class JDBC {
             System.out.println("Database Driver Name is " + driverName);
 
 
-            InsertNewUser("Kevin", "Ta", "ree@ree.edu", "Turlock" );
+            //InsertNewUser("Sonny", "Ta", "sta@gmail.com", "lso" );
+
+            Boolean b = CheckLoginInfo("sta@gmail.com", "lso");
+            System.out.println(b);
+
 
 
 
