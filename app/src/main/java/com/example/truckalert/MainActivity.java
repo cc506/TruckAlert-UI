@@ -102,6 +102,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mfab_direction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MapsActivity2.class);
+                startActivity(intent);
             }
         });
     }
