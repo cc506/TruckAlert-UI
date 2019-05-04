@@ -40,11 +40,6 @@ public class JDBC {
         try (Connection conn = DriverManager.getConnection(URL, username, password);
              Statement pstmt = conn.createStatement()) {
 
-            //pstmt.setString(1, emaiL);
-            //pstmt.setString(2, firstName);
-            //pstmt.setString(3, lastName);
-            //pstmt.setString(4, passWord);
-
             pstmt.executeUpdate(SQL);
 
             System.out.println("Thank you " + firstName + "! We have created your new account!");
@@ -157,8 +152,8 @@ public class JDBC {
 
             //InsertNewUser("Sonny", "Ta", "sta@gmail.com", "lso" );
 
-            Boolean b = CheckLoginInfo("sta@gmail.com", "lso");
-            System.out.println(b);
+            //Boolean b = CheckLoginInfo("sta@gmail.com", "lso");
+            //System.out.println(b);
 
 
 

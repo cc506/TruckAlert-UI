@@ -19,32 +19,41 @@ public class Signup extends AppCompatActivity {
     private EditText eiteText2;
     private EditText eiteText3;
     private EditText eiteText4;
+    String first_Name;
+    String last_Name;
+    String Email;
+    String Password;
 
 
-    //String email = first_name.getText().toString();
-   // String password = button_Signup2.getText().toString();
 
     public void extractStringInputs(View arg0) {
+
         eiteText=(EditText)findViewById(R.id.first_name);
-        String first_Name=eiteText.getText().toString();
+        first_Name=eiteText.getText().toString();
         Log.d("TAG",first_Name);
 
         eiteText2=(EditText)findViewById(R.id.last_name);
-        String last_Name=eiteText.getText().toString();
+        last_Name=eiteText2.getText().toString();
         Log.d("TAG",last_Name);
 
         eiteText3=(EditText)findViewById(R.id.email);
-        String Email=eiteText.getText().toString();
+        Email=eiteText3.getText().toString();
         Log.d("TAG",Email);
 
+        eiteText4=(EditText)findViewById(R.id.password);
+        Password=eiteText4.getText().toString();
+        Log.d("TAG",Password);
 
 
+        System.out.println(first_Name);
+        System.out.println(last_Name);
+        System.out.println(Email);
+        System.out.println(Password);
 
-        //JDBC.InsertNewUser(String first_Name, String last_Name, String Email, String passWord)
 
-        //System.out.println(firstName);
-        //System.out.println(lastName);
     }
+
+    //public void onCreate
 
 
     @Override
@@ -57,7 +66,9 @@ public class Signup extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Signup.this, LoginActivity2.class);
+                //JDBC.InsertNewUser(first_Name, last_Name, Email, Password);
                 startActivity(intent);
+                JDBC.InsertNewUser(first_Name, last_Name, Email, Password);
             }
         });
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -68,6 +79,7 @@ public class Signup extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goBackIntent = new Intent(Signup.this, LoginActivity2.class);
+               // startActivity(JDBC.InsertNewUser(first_Name, last_Name, Email, Password));
                 startActivity(goBackIntent);
 
             }
