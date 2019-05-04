@@ -307,7 +307,7 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
 
     // Action of going to map
     public void openMap(){
-        Intent mapIntent = new Intent(this, MainActivity.class);
+        Intent mapIntent = new Intent(this, MapsActivity2.class);
         startActivity(mapIntent);
     }
 
