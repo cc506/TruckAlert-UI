@@ -53,11 +53,9 @@ public class Signup extends AppCompatActivity {
 
     }
 
-    //public void onCreate
-
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //go to Sign in screen after signing up
         setContentView(R.layout.activity_signup);
@@ -65,10 +63,11 @@ public class Signup extends AppCompatActivity {
         button_Signup2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Signup.this, LoginActivity2.class);
-                //JDBC.InsertNewUser(first_Name, last_Name, Email, Password);
-                startActivity(intent);
                 JDBC.InsertNewUser(first_Name, last_Name, Email, Password);
+
+                Intent intent = new Intent(Signup.this, LoginActivity2.class);
+
+                startActivity(intent);
             }
         });
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -87,14 +86,7 @@ public class Signup extends AppCompatActivity {
 
         });
 
-        FloatingActionButton mfab = findViewById(R.id.fab);
-        mfab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
     }
 
     //public static void main (String[]args){

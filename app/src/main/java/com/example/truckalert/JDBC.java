@@ -18,36 +18,29 @@ public class JDBC {
 
     /* Connection statement */
 
-    String URL = "jdbc:postgresql://localhost:5432/postgres";
-
-    String username = "postgres";
-    String password = "3service4";
-
-
     public static void InsertNewUser (String firstName, String lastName, String emaiL, String passWord){
 
-        String URL = "jdbc:postgresql://localhost:5432/postgres";
-        String username = "postgres";
-        String password = "3service4";
+        Connection conn = null;
+        Statement stmt = null;
 
+        try {
+            Class.forName("org.postgresql.Driver");
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "3service4");
+            System.out.println("Opened database successfully");
 
-        //INSERT INTO user_credentials (email, first_name, last_name, pass)
-        //VALUES ('reeree', 'Kevin', 'Ta', 'onision')
+            stmt = conn.createStatement();
 
-        String SQL = "INSERT INTO user_credentials(email,first_name,last_name,pass)"
+            String SQL = "INSERT INTO user_credentials(email,first_name,last_name,pass)"
                     + "VALUES ('" + emaiL + "','" + firstName + "','" + lastName + "','" + passWord + "');";
 
-        try (Connection conn = DriverManager.getConnection(URL, username, password);
-             Statement pstmt = conn.createStatement()) {
-
-            pstmt.executeUpdate(SQL);
-
-            System.out.println("Thank you " + firstName + "! We have created your new account!");
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            stmt.executeUpdate(SQL);
+            stmt.close();
+            conn.close();
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+            System.exit(0);
         }
-
+        System.out.println("Thank you " + firstName + "! We have created your new account!");
         //return
     }
 
@@ -113,7 +106,7 @@ public class JDBC {
     }
 
 
-    public static void main(String[] args){
+    public static void main(){
 
 
         try{
@@ -150,7 +143,7 @@ public class JDBC {
             System.out.println("Database Driver Name is " + driverName);
 
 
-            //InsertNewUser("Sonny", "Ta", "sta@gmail.com", "lso" );
+           // InsertNewUser("Jay", "Ta", "sta@gmail.com", "lso" );
 
             //Boolean b = CheckLoginInfo("sta@gmail.com", "lso");
             //System.out.println(b);
