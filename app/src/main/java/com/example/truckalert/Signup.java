@@ -66,7 +66,8 @@ public class Signup extends AppCompatActivity {
                 JDBC.InsertNewUser(first_Name, last_Name, Email, Password);
 
                 Intent intent = new Intent(Signup.this, LoginActivity2.class);
-
+                //JDBC.InsertNewUser(first_Name, last_Name, Email, Password);
+                JDBC.InsertNewUser(first_Name, last_Name, Email, Password);
                 startActivity(intent);
             }
         });

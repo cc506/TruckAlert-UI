@@ -60,6 +60,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
     //Initialize Map & Location service
     LocationRequest mLocationRequest;
     Location mLastLocation;
+
     FusedLocationProviderClient mFusedLocationClient;
     private boolean mLocationPermissionGranted = false;
 
@@ -73,7 +74,6 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
         btnFindPath = (Button) findViewById(R.id.btnFindPath);
         etOrigin = (EditText) findViewById(R.id.etOrigin);
         etDestination = (EditText) findViewById(R.id.etDestination);
@@ -146,7 +146,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 
                 //Place current location marker
                 LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-
+                Toast.makeText(getApplicationContext(),"Your Location is - \nLat: " + location.getLatitude() + "\nLong: " + location.getLongitude(), Toast.LENGTH_LONG).show();
                 //move map camera
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
             }
