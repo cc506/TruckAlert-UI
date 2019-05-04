@@ -67,8 +67,8 @@ public class Signup extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Signup.this, LoginActivity2.class);
                 //JDBC.InsertNewUser(first_Name, last_Name, Email, Password);
-                startActivity(intent);
                 JDBC.InsertNewUser(first_Name, last_Name, Email, Password);
+                startActivity(intent);
             }
         });
         Toolbar toolbar = findViewById(R.id.toolbar);
