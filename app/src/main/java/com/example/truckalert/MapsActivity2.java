@@ -6,8 +6,11 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.GpsStatus;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
+import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -60,9 +63,10 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
     //Initialize Map & Location service
     LocationRequest mLocationRequest;
     Location mLastLocation;
-
+    TextView textView2;
     FusedLocationProviderClient mFusedLocationClient;
     private boolean mLocationPermissionGranted = false;
+    int count =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +88,26 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
                 sendRequest();
             }
         });
-    }
 
+
+    }
+    //ignore the couple of functions you don't recognize
+    public void contest(){
+        count++;
+        refresh(2000);
+    }
+    private void refresh(int milliseconds){
+
+        final Handler handler= new Handler();
+        final Runnable runnable= new Runnable() {
+            @Override
+            public void run() {
+
+                contest();
+            }
+        };
+        handler.postDelayed(runnable,milliseconds);
+    }
     private void sendRequest() {
         String origin = etOrigin.getText().toString();
         String destination = etDestination.getText().toString();
@@ -147,6 +169,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
                 //Place current location marker
                 LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
                 Toast.makeText(getApplicationContext(),"Your Location is - \nLat: " + location.getLatitude() + "\nLong: " + location.getLongitude(), Toast.LENGTH_LONG).show();
+
                 //move map camera
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
             }
