@@ -1,3 +1,5 @@
+
+
 package com.example.truckalert;
 
 import java.sql.*;
@@ -12,6 +14,8 @@ import java.sql.PreparedStatement;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 
 public class JDBC {
@@ -45,6 +49,59 @@ public class JDBC {
     }
 
 
+    public static void StoreUserCoordinates (float Long, float Lat){
+
+        Connection conn = null;
+        Statement stmt = null;
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "3service4");
+            System.out.println("Opened database successfully");
+
+            stmt = conn.createStatement();
+
+            String SQL = "INSERT INTO user_coordinates(longitude, latitude)"
+                    + "VALUES ('" + Long + "','" + Lat + "');";
+
+            stmt.executeUpdate(SQL);
+            stmt.close();
+            conn.close();
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+            System.exit(0);
+        }
+        System.out.println("Successfully stored coordinates! \n"
+                + "Longitude: " + Long + "\n"
+                + "Latitude: " + Lat);
+    }
+
+    public static void StoreObstacleCoordinates (float Long, float Lat){
+
+        Connection conn = null;
+        Statement stmt = null;
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "3service4");
+            System.out.println("Opened database successfully");
+
+            stmt = conn.createStatement();
+
+            String SQL = "INSERT INTO obstacle_coordinates(longitude, latitude)"
+                    + "VALUES ('" + Long + "','" + Lat + "');";
+
+            stmt.executeUpdate(SQL);
+            stmt.close();
+            conn.close();
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+            System.exit(0);
+        }
+        System.out.println("Successfully stored coordinates! \n"
+                + "Longitude: " + Long + "\n"
+                + "Latitude: " + Lat);
+    }
 
 
     public static boolean CheckLoginInfo (String emailInput, String passWordInput){
@@ -106,7 +163,51 @@ public class JDBC {
     }
 
 
-    public static void main(){
+    public static void TestLoad (){
+        String firstName, lastName, emaiL, passWord = "";
+
+        int iterations = 0;
+        Scanner myScan = new Scanner (System.in);
+
+        System.out.print("Enter First Name: ");
+        firstName = myScan.nextLine();
+
+        System.out.print("Enter Last Name: ");
+        lastName = myScan.nextLine();
+
+        System.out.print("Enter Email: ");
+        emaiL = myScan.nextLine();
+
+        System.out.print("Enter Password: ");
+        passWord = myScan.nextLine();
+
+        System.out.print("How many iterations?: ");
+        iterations = myScan.nextInt();
+
+        long startTime = System.nanoTime();
+        for (int i = 0; i < iterations; i++){
+            InsertNewUser(firstName, lastName, emaiL, passWord );
+        }
+        long endTime = System.nanoTime();
+
+        long durationNano = (endTime - startTime);
+        long durationMillis = TimeUnit.NANOSECONDS.toMillis(durationNano);
+        long durationSecs = TimeUnit.NANOSECONDS.toSeconds(durationNano);
+
+
+
+        System.out.println("Completed appending!");
+        System.out.println("This action completed in: " + durationMillis + " milliseconds");
+        System.out.println("This action completed in: " + durationSecs + " seconds");
+
+
+
+    }
+
+
+
+
+    public static void main(String [] args){
 
 
         try{
@@ -143,6 +244,7 @@ public class JDBC {
             System.out.println("Database Driver Name is " + driverName);
 
 
+            TestLoad();
            // InsertNewUser("Jay", "Ta", "sta@gmail.com", "lso" );
 
             //Boolean b = CheckLoginInfo("sta@gmail.com", "lso");

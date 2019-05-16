@@ -169,7 +169,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
                 //Place current location marker
                 LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
                 Toast.makeText(getApplicationContext(),"Your Location is - \nLat: " + location.getLatitude() + "\nLong: " + location.getLongitude(), Toast.LENGTH_LONG).show();
-
+                //JDBC.StoreCoordinates((float)location.getLatitude(), (float)location.getLongitude());
                 //move map camera
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
             }
