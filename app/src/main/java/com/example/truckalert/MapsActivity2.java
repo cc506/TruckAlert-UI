@@ -1,6 +1,8 @@
 package com.example.truckalert;
 
 import android.Manifest;
+import java.util.Random;
+
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -67,6 +69,10 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
     FusedLocationProviderClient mFusedLocationClient;
     private boolean mLocationPermissionGranted = false;
     int count =0;
+    public int getRandomColor(){
+        Random rnd = new Random();
+        return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -287,7 +293,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 
             PolylineOptions polylineOptions = new PolylineOptions().
                     geodesic(true).
-                    color(Color.BLUE).
+                    color(getRandomColor()).
                     width(10);
 
             for (int i = 0; i < route.points.size(); i++)
