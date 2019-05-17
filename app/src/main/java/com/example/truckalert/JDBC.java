@@ -186,7 +186,7 @@ public class JDBC {
 
         long startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++){
-            InsertNewUser(firstName, lastName, emaiL, passWord );
+            JDBC.InsertNewUser(firstName, lastName, emaiL, passWord );
         }
         long endTime = System.nanoTime();
 
