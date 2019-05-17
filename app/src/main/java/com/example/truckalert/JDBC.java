@@ -163,6 +163,49 @@ public class JDBC {
     }
 
 
+    public static void getNumObstacles(String emailInput){
+        Connection conn = null;
+        Statement stmt = null;
+        Statement stmt2 = null;
+        ResultSet rs1 = null;
+        ResultSet rs2 = null;
+        String name = "";
+        int val = 0;
+        try {
+            Class.forName("org.postgresql.Driver");
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "3service4");
+            System.out.println("Opened database successfully");
+
+            stmt = conn.createStatement();
+
+
+            String SQL = "SELECT COUNT(longitude) FROM obstacle_coordinates WHERE email = " + "'" + emailInput + "');";
+
+            String SQL2 = "SELECT DISTINCT first_name FROM user_credentials WHERE email = " + "'" + emailInput + "');";
+
+            rs1 = stmt2.executeQuery(SQL2);
+
+            name = rs1.getString(1);
+
+            rs2 = stmt.executeQuery(SQL);
+            val = rs2.getInt(1);
+            //String name = stmt2.execute(SQL2);
+            stmt.close();
+            conn.close();
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+            System.exit(0);
+        }
+        System.out.println("User " + name + "reported " + val + " obstacles");
+    }
+
+
+    public static void findCoordinates(Long longitude, Long latitude){
+        String SQL = "SELECT COUNT(longitude) FROM obstacle_coordinates WHERE // coorindates are checked in a 10 mile radius";
+    }
+
+
+
     public static void TestLoad (){
         String firstName, lastName, emaiL, passWord = "";
 
